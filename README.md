@@ -17,22 +17,22 @@ Inigo Gonzalez 2014 - Copyright (c) GPL Licensed
 
 iOS
 	
-	cordova plugin add https://github.com/Wizcorp/phonegap-plugin-notifications
+	cordova plugin add https://github.com/inigoini/cordova-plugin-device-notification
 	build ios
 	
 	< or >
 	
-	phonegap local plugin add https://github.com/Wizcorp/phonegap-plugin-deviceNotifications
+	phonegap local plugin add https://github.com/inigoini/cordova-plugin-device-notification
 	phonegap build ios
 
 Android
 	
-	cordova plugin add https://github.com/Wizcorp/phonegap-plugin-deviceNotifications
+	cordova plugin add https://github.com/inigoini/cordova-plugin-device-notification
 	build android
 	
 	< or >
 	
-	phonegap local plugin add https://github.com/Wizcorp/phonegap-plugin-deviceNotifications
+	phonegap local plugin add https://github.com/inigoini/cordova-plugin-device-notification
 	phonegap build android
 
 
