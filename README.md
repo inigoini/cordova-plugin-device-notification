@@ -15,7 +15,7 @@ Inigo Gonzalez 2014 - Copyright (c) GPL Licensed
 
 ## Install (with Plugman) 
 
-iOS
+iOS (not ready)
 	
 	cordova plugin add https://github.com/inigoini/cordova-plugin-device-notification
 	build ios
@@ -40,7 +40,7 @@ Android
 
 ### Add a notification
 
-	deviceNotification.add(Int id, JSONObject options);
+	deviceNotification.add( JSONObject options );
 
 ** NOTE: Adding a notification with the same id stops the notification and adds another. **
 
@@ -52,10 +52,9 @@ Android
 	
 ### Cancel a notification
 
-	deviceNotification.cancel(Int id); 
+	deviceNotification.cancel( int id ); 
 
 
 ### Cancel all notifications
 
 	deviceNotification.cancelAll(); 
-
