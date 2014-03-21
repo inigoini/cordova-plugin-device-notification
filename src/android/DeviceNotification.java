@@ -14,11 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.iniciacomunicacion.phonegap.plugin.devicenotification;
+package com.iniciacomunicacion.devicenotification;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
-import org.apache.cordova.CordovaWebView;//TODO
 import org.json.JSONArray;
 import org.json.JSONException;
 
