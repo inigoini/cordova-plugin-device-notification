@@ -41,35 +41,35 @@ public class DeviceNotification extends CordovaPlugin {
 	/**
 	 * Executes the request and returns PluginResult.
 	 *
-	 * @param action            The action to execute ('add', 'cancel' or 'cancelAll').
-	 * @param args              JSONArray of arguments for the plugin.
+	 * @param action			The action to execute ('add', 'cancel' or 'cancelAll').
+	 * @param args			  JSONArray of arguments for the plugin.
 	 * @param callbackContext   The callback context used when calling back into JavaScript.
-	 * @return                  True when the action was valid, false otherwise.
+	 * @return				  True when the action was valid, false otherwise.
 	 */
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
-        // Add notification
+		// Add notification
 		if (action.equals("add")) {
 			String title = args.getJSONObject(0).getString("title");
 			String message = args.getJSONObject(0).getString("message");
-            int id = args.getJSONObject(0).getInt("id");
+			int id = args.getJSONObject(0).getInt("id");
 			this.add(callbackContext, title, message, 0, id);
 
-        // Cancel notification by ID
+		// Cancel notification by ID
 		} else if (action.equals("cancel")) {
 			int id = args.getJSONObject(1).getInt("id");
 			this.cancel(callbackContext, id);
 
-        // Cancel all notifications
+		// Cancel all notifications
 		} else if (action.equals("cancelAll")) {
 			this.cancelAll(callbackContext);
 		} else {
 			return false;
 		}
-	     // Only alert and confirm are async.
-	     callbackContext.success();
-	     return true;
+		 // Only alert and confirm are async.
+		 callbackContext.success();
+		 return true;
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class DeviceNotification extends CordovaPlugin {
 	 */
 	public void add(CallbackContext callbackContext, String title, String message, int smallIcon, int id) {
 
-        //cordova.getActivity().getApplicationContext()
+		//cordova.getActivity().getApplicationContext()
 		NotificationManager notificationManager = (NotificationManager)cordova.getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
 		
 		Notification notification;
@@ -105,20 +105,20 @@ public class DeviceNotification extends CordovaPlugin {
 	 * 
 	 * @param callbackContext, Callback context of the request from Cordova
 	 * @param id, notification id registered using add()
-     * @see add
+	 * @see add
 	 */
 	public void cancel(CallbackContext callbackContext, int id) {
 		NotificationManager notificationManager = (NotificationManager)cordova.getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(id);
+		notificationManager.cancel(id);
 	}
 
 	/**
-     * Cancels all notifications
-     *
+	 * Cancels all notifications
+	 *
 	 * @param callbackContext Callback context of the request from Cordova
 	 */
 	public void cancelAll(CallbackContext callbackContext) {
-        NotificationManager notificationManager = (NotificationManager)cordova.getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancelAll();
+		NotificationManager notificationManager = (NotificationManager)cordova.getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+		notificationManager.cancelAll();
 	}
 }
