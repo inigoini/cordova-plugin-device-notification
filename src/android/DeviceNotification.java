@@ -51,9 +51,9 @@ public class DeviceNotification extends CordovaPlugin {
 
         // Add notification
 		if (action.equals("add")) {
-			String title = args.getJSONObject(1).getString("title");
-			String message = args.getJSONObject(1).getString("message");
-            int id = args.getJSONObject(1).getInt("id");
+			String title = args.getJSONObject(0).getString("title");
+			String message = args.getJSONObject(0).getString("message");
+            int id = args.getJSONObject(0).getInt("id");
 			this.add(callbackContext, title, message, 0, id);
 
         // Cancel notification by ID
