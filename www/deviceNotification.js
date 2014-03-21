@@ -18,25 +18,24 @@
 var exec = require("cordova/exec");
 
 if (window.cordova) {
-    window.document.addEventListener("deviceready", function () {
-        exec(null, null, "DeviceNotification", "ready", []);
-    }, false);
+	window.document.addEventListener("deviceready", function () {
+		//exec(null, null, "DeviceNotification", "ready", []);
+	}, false);
 }
 
 var DeviceNotification = function () {};
 
-DeviceNotification.prototype.add = function (id, options) {
-		exec(null, null, "DeviceNotification", "add", [options]);
-	};
+DeviceNotification.prototype.add = function ( options ) {
+	exec(null, null, "DeviceNotification", "add", [options]);
+};
 
-DeviceNotification.prototype.cancel = function (id) {
-		exec(null, null, "DeviceNotification", "cancel", [id]);
-	};
+DeviceNotification.prototype.cancel = function ( id ) {
+	exec(null, null, "DeviceNotification", "cancel", [id]);
+};
 	
 DeviceNotification.prototype.cancelAll = function () {
-        exec(null, null,"DeviceNotification", "cancelAll", []);
-    };
-    
+	exec(null, null,"DeviceNotification", "cancelAll", []);
+};
 
 
 // Instantiate DeviceNotification
