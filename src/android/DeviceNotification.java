@@ -23,8 +23,9 @@ import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import android.R;
 import android.content.Context;
+import android.content.res.Resources;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 
@@ -35,7 +36,8 @@ import android.app.NotificationManager;
  */
 public class DeviceNotification extends CordovaPlugin {
 
-	private static CordovaWebView webView = null;
+	//private static CordovaWebView webView = null;
+	protected static Activity activity = null; 
 	protected static Context context = null;
 	
 	/**
@@ -48,17 +50,18 @@ public class DeviceNotification extends CordovaPlugin {
 	public void initialize (CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
 
-		DeviceNotification.webView = super.webView;
+		//DeviceNotification.webView = super.webView;
+		DeviceNotification.activity = super.cordova.getActivity();
 		DeviceNotification.context = super.cordova.getActivity().getApplicationContext();
 	}
 
 	/**
 	 * Executes the request and returns PluginResult.
 	 *
-	 * @param action	The action to execute ('add', 'cancel' or 'cancelAll').
-	 * @param args		JSONArray of arguments for the plugin.
+	 * @param action			The action to execute ('add', 'cancel' or 'cancelAll').
+	 * @param args			  JSONArray of arguments for the plugin.
 	 * @param callbackContext   The callback context used when calling back into JavaScript.
-	 * @return true when the action was valid, false otherwise.
+	 * @return				  True when the action was valid, false otherwise.
 	 */
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -98,14 +101,15 @@ public class DeviceNotification extends CordovaPlugin {
 	 */
 	public void add(CallbackContext callbackContext, String ticker, String title, String message, int id) {
 
-		//cordova.getActivity().getApplicationContext()
-		NotificationManager notificationManager = (NotificationManager)cordova.getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+		Resources res = DeviceNotification.context.getResources();
+		int ic_launcher = res.getIdentifier("icon", "drawable", DeviceNotification.activity.getPackageName());
 
+		NotificationManager notificationManager = (NotificationManager)cordova.getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification notification = new Notification.Builder(DeviceNotification.context)
 		.setTicker(ticker)
 		.setContentTitle(title)
 		.setContentText(message)
-		//.setSmallIcon(R.drawable.ic_launcher)
+		.setSmallIcon(ic_launcher)
 		//.setLargeIcon(R.drawable.ic_launcher)
 		.build();
 

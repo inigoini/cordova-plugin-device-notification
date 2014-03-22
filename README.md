@@ -46,6 +46,7 @@ Android
 
 	{
     	id: 30,
+    	ticker: 'ticker title' 
     	title: 'Notification title',
     	message: "New notification!!!!"
 	}; 
