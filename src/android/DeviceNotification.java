@@ -24,10 +24,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.app.Activity;
-import android.app.Notification;
+import android.support.v4.app.NotificationCompat;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 
 /**
  * This class provides access to Notification manager on the device.
@@ -102,21 +104,33 @@ public class DeviceNotification extends CordovaPlugin {
 	public void add(CallbackContext callbackContext, String ticker, String title, String message, int id) {
 
 		Resources res = DeviceNotification.context.getResources();
-		int ic_launcher = res.getIdentifier("icon", "drawable", DeviceNotification.activity.getPackageName());
-
-		NotificationManager notificationManager = (NotificationManager)cordova.getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-		Notification notification = new Notification.Builder(DeviceNotification.context)
+		int ic_launcher = res.getIdentifier("icon", "drawable", cordova.getActivity().getPackageName());
+		
+		/* Version 4.x
+		NotificationManager notificationManager = (NotificationManager)DeviceNotification.activity.getSystemService(Context.NOTIFICATION_SERVICE);
+		Notification notification = new Notification.Builder(DeviceNotification.Context)
 		.setTicker(ticker)
 		.setContentTitle(title)
 		.setContentText(message)
 		.setSmallIcon(ic_launcher)
-		//.setLargeIcon(R.drawable.ic_launcher)
+		.setWhen(System.currentTimeMillis())
+		.setAutoCancel(true)
 		.build();
-
-		//Notification notification = new Notification(R.drawable.ic_launcher, getString(R.string.app_name), System.currentTimeMillis());
 		notification.flags = Notification.FLAG_AUTO_CANCEL | Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND;
-		//notification.setLatestEventInfo(this, title, message, contentIntent);
-		notificationManager.notify(id, notification);
+		notificationManager.notify(id, notification);*/
+		
+		//Version 2.x
+		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(DeviceNotification.activity)
+		.setSmallIcon(ic_launcher)
+		.setWhen(System.currentTimeMillis())
+		.setContentTitle(title)
+		.setContentText(message)
+			.setTicker(ticker);
+		Intent resultIntent = new Intent(DeviceNotification.activity, DeviceNotification.activity.getClass());
+		PendingIntent resultPendingIntent = PendingIntent.getActivity(DeviceNotification.activity, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+		mBuilder.setContentIntent(resultPendingIntent);
+		NotificationManager mNotifyMgr = (NotificationManager)DeviceNotification.activity.getSystemService(android.content.Context.NOTIFICATION_SERVICE);
+		mNotifyMgr.notify(id, mBuilder.build());
 	}
 
 	/**

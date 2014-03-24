@@ -7,6 +7,9 @@
 
 PhoneGap plugin for providing native local notification system to JavaScript.
 
+The plugin runs on Android version 2.x+
+
+
 ** NOTE: Notification queuing is iOS ONLY.**
 
 # Credits
